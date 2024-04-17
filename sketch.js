@@ -1,40 +1,45 @@
 function setup() {
     createCanvas(400, 400);
   }
+  // Wordle Game
+  const secretWord = "apple";
+  const maxAttempts = 6;
+  let attempts = 0;
+  let guessedWord = "_____";
+  
+  console.log("Welcome to Wordle!");
+  console.log(`You have ${maxAttempts} attempts to guess the secret word.`);
+  
+  while (attempts < maxAttempts) {
+    console.log(`Attempt #${attempts + 1}`);
+    console.log(`Current word: ${guessedWord}`);
+  
+    const guess = prompt("Enter your guess:").toLowerCase();
+  
+    if (guess.length !== secretWord.length) {
+      console.log("Invalid guess. Guess a word with the same length as the secret word.");
+      continue;
+    }
+  
+    attempts++;
+  
+    for (let i = 0; i < secretWord.length; i++) {
+      if (secretWord[i] === guess[i]) {
+        guessedWord = guessedWord.substring(0, i) + secretWord[i] + guessedWord.substring(i + 1);
+      }
+    }
+  
+    if (guessedWord === secretWord) {
+      console.log(`Congratulations! You guessed the secret word "${secretWord}" in ${attempts} attempts.`);
+      break;
+    }
+  }
+  
+  if (attempts === maxAttempts) {
+    console.log(`Sorry, you've reached the maximum number of attempts. The secret word was "${secretWord}".`);
+  
+  }
   
   function draw() {
     background(220);
-    background("green")
-    strokeWeight(5)
-    fill('white')
-    ellipse(175, 300, 50, 30)
-    ellipse(225, 300, 50, 30)
-    fill('yellow')
-    ellipse(165, 250, 30, 50)
-    ellipse(235, 250, 30, 50)
-    rect(160, 210, 80, 80)
-    
-    
-    
-    triangle(165, 220, 200, 230, 185, 240)
-    triangle(235, 220, 200, 230, 215, 240)
-    fill('white')
-    strokeWeight(3)
-    ellipse(200, 242, 10, 10)
-    strokeWeight(5)
-    ellipse(170, 115, 45, 80)
-    ellipse(230, 115, 45, 80)
-    ellipse(200, 180, 120, 100)
-    strokeWeight(0)
-  
-    ellipse(175, 140, 35, 25)
-    ellipse(225, 140, 35, 25)
-    fill('black')
-    ellipse(180, 185, 10, 10)
-    ellipse(220, 185, 10, 10)
-    strokeWeight(5)
-    line(195, 200, 205, 205);
-    line(195, 205, 205, 200);
-    
-    
   }
